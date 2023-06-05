@@ -14,12 +14,12 @@ exports.create = (req, res) => {
   // Create a Pokemon
   const pokemon = new Pokemon({
     id:req.body.id,
-    description: req.body.pName,
     teamname: req.body.pTeamname,
     experience: req.body.pExperience,
     image: req.body.pImage,
     abilities: req.body.pAbilities,
-    types: req.body.pTypes
+    types: req.body.pTypes,
+    name: req.body.pName
   });
 
   // Save Pokemon in the database
@@ -40,15 +40,17 @@ exports.create = (req, res) => {
 
 // Retrieve all pokemons from the database (with condition).
 exports.findAll = (req, res) => {
-  const id = req.query.id;
-
-  Pokemon.getAll(id, (err, data) => {
-    if (err)
+  //const id = req.params.id;
+  const idchild = req.params.teamid;
+  console.log('req4FALL',req);
+  console.log('req6FALL',req.params.teamid);
+  Pokemon.getAll(idchild,(err, data) => {
+    if (err) 
       res.status(500).send({
         message:
           err.message || "Some error occurred while retrieving pokemons."
       });
-    else 
+    else  
     {
       console.log('res',data); 
       res.send(data);
@@ -74,6 +76,22 @@ exports.findOne = (req, res) => {
   });
 };
 
+exports.findChild = (req, res) => { 
+  console.log('I AM HERE ',req.params.id)
+  Pokemon.findChildById(req.params.id, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Pokemon with id ${req.params.id}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Pokemon with id " + req.params.id
+        });
+      }
+    } else res.send(data);
+  });
+};
 // Update a Pokemon identified by the id in the request
 exports.update = (req, res) => {
   // Validate Request

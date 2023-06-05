@@ -12,6 +12,9 @@ module.exports = app => {
   // Retrieve a single Pokemon with id
   router.get("/:id", pokemons.findOne);
 
+  // Retrieve a single Pokemon with id
+  router.get("/:idRow", pokemons.findChild);
+
   // // Update a Pokemon with id
   // router.put("/:id", pokemons.update);
 
