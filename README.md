@@ -1,6 +1,6 @@
--Backend run at loclajost:8080
+---Backend run at loclajost:8080
 
--Before to use, please run this script for mysql
+---Before to use, please run this script for mysql
 
     CREATE DATABASE `tournament` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
@@ -29,8 +29,8 @@
     PRIMARY KEY (`id`)
     ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--Under app/config/db.config.js set the credentials for connect to database
+---Under app/config/db.config.js set the credentials for connect to database
 
 
--For run
+---For run
     node server.js
